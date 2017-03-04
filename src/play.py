@@ -1,8 +1,10 @@
 from board import Board
+from board import BoardException
+
 
 def take_move(board):
-    print 'Please input move [up/down/left/right]'
-    move = raw_input()
+    print('Please input move [up/down/left/right]')
+    move = input()
     if move == 'up':
         board.move_up()
     if move == 'down':
@@ -13,6 +15,7 @@ def take_move(board):
         board.move_left()
     board.print_board()
 
+
 def play_puzzle():
     goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
     board = Board([1, 2, 3, 4, 0, 5, 6, 7, 8])
@@ -20,11 +23,15 @@ def play_puzzle():
 
     while True:
         if board.tiles == goal:
-            print 'success!'
+            print('success!')
             break
         else:
             try:
                 take_move(board)
-            except:
-                print 'Invalid move!'
+            except BoardException:
+                print('Invalid move!')
+
+
+if __name__ == '__main__':
+    play_puzzle()
 

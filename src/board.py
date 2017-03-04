@@ -1,14 +1,9 @@
-from utility import *
-
 class Board:
-
     def __init__(self, input_tiles):
         self.tiles = input_tiles
 
-
     def reset(self):
         self.tiles = [1, 2, 3, 4, 0, 5, 6, 6, 7, 8]
-
 
     def move_up(self):
         gap = self.gap()
@@ -17,7 +12,7 @@ class Board:
             self.tiles[gap] = self.tiles[gap - 3]
             self.tiles[gap - 3] = 0
         else:
-            raise Exception('invalid move')
+            raise BoardException('invalid move')
 
     def move_down(self):
         gap = self.gap()
@@ -26,7 +21,7 @@ class Board:
             self.tiles[gap] = self.tiles[gap + 3]
             self.tiles[gap + 3] = 0
         else:
-            raise Exception('invalid move')
+            raise BoardException('invalid move')
 
     def move_left(self):
         gap = self.gap()
@@ -35,8 +30,7 @@ class Board:
             self.tiles[gap] = self.tiles[gap - 1]
             self.tiles[gap - 1] = 0
         else:
-            raise Exception('invalid move')
-
+            raise BoardException('invalid move')
 
     def move_right(self):
         gap = self.gap()
@@ -45,12 +39,10 @@ class Board:
             self.tiles[gap] = self.tiles[gap + 1]
             self.tiles[gap + 1] = 0
         else:
-            raise Exception('invalid move')
-
+            raise BoardException('invalid move')
 
     def gap(self):
         return self.tiles.index(0)
-
 
     def can_go(self):
         gap = self.gap()
@@ -76,10 +68,14 @@ class Board:
 
         return [go_up, go_right, go_down, go_left]
 
-
     def print_board(self):
-        print str(self.tiles[0]) + ' ' + str(self.tiles[1]) + ' ' + str(self.tiles[2])
-        print str(self.tiles[3]) + ' ' + str(self.tiles[4]) + ' ' + str(self.tiles[5])
-        print str(self.tiles[6]) + ' ' + str(self.tiles[7]) + ' ' + str(self.tiles[8])
+        print(str(self.tiles[0]) + ' ' + str(self.tiles[1]) + ' ' + str(self.tiles[2]))
+        print(str(self.tiles[3]) + ' ' + str(self.tiles[4]) + ' ' + str(self.tiles[5]))
+        print(str(self.tiles[6]) + ' ' + str(self.tiles[7]) + ' ' + str(self.tiles[8]))
 
+
+class BoardException(Exception):
+    def __init___(self, args):
+        Exception.__init__(self, str(args))
+        self.args = args
 
